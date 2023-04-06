@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Home page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/navbar.css}">
+</head>
+<body>
+
+
+<nav class="navbar" th:fragment="header">
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" th:href="@{/login-details}">Login Details</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/legoCategory/categoryAdmin.html}">Categories</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/legoStore/homePage.html}">Products</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+    </ul>
+</nav>
+
+
+<H3>Welcome to Lego Store Algebra!</H3>
+<!--<p th:text="${newLegoPiece.name}" />-->
+
+
+
+
+<table>
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> ID </th>
+        <th> Category </th>
+        <th> Price </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${legoPieces.empty}">
+        <td colspan="2"> No Lego pieces Available </td>
+    </tr>
+    <tr th:each="legoPiece : ${legoPieces}">
+        <td><span th:text="${legoPiece.name}"> Name </span></td>
+        <td><span th:text="${legoPiece.id}"> ID </span></td>
+        <td><span th:text="${legoPiece.category}"> Category </span></td>
+        <td><span th:text="${legoPiece.price}"> Price </span></td>
+        <td><a th:href="@{/legoStore/updateLego/{id}(id=${legoPiece.id})}">Update</a></td>
+        <td><a th:href="@{/legoStore/deleteLego/{id}(id=${legoPiece.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<form method="post" th:object="${newLegoPiece}" th:action="@{/legoStore/saveNewLegoPiece.html}">
+    <input type="text" name="id" th:field="*{id}" th:required="required" placeholder="Id"/>
+    <input type="text" name="name" th:field="*{name}" th:required="required" placeholder="Name"/>
+<!--    <input type="text" name="category" th:field="*{category}" placeholder="Category"/>-->
+    <select th:field="*{category}" th:required="required">
+        <option th:each="category :
+                ${T(hr.algebra.java.web.lego.legostorewithdata.domain.Category).values()}"
+                th:value="${category}"
+                th:text="${category}">
+        </option>
+    </select>
+    <input type="text" name="price" th:field="*{price}" th:required="required" placeholder="Price"/>
+    <button type="submit">Save New Lego Piece</button>
+</form>
+
+<a th:href="@{/legoStore/cleanSession.html}">Clean session</a>
+
+</body>
+</html>

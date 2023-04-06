@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<H3>Welcome to Lego Store Algebra!</H3>
+
+<table>
+  <thead>
+  <tr>
+    <th> Name </th>
+    <th> Category </th>
+    <th> Price </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${legoPieces.empty}">
+    <td colspan="2"> No Lego pieces Available </td>
+  </tr>
+  <tr th:each="legoPiece : ${legoPieces}">
+    <td><span th:text="${legoPiece.name}"> Name </span></td>
+
+    <td><span th:text="${legoPiece.category}"> Category </span></td>
+    <td><span th:text="${legoPiece.price}"> Price </span></td>
+    <td><a th:href="@{/lego/buyLego/{id}(id=${legoPiece.id})}">Add to cart</a></td>
+<!--    <td><a th:href="@{/legoStore/updateLego/{id}(id=${legoPiece.id})}">Update</a></td>
+    <td><a th:href="@{/legoStore/deleteLego/{id}(id=${legoPiece.id})}">Delete</a></td>-->
+  </tr>
+  </tbody>
+</table>
+
+
+</body>
+</html>

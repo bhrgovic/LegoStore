@@ -1,0 +1,22 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    height: 60px; /* adjust to your preferred height */
+    background-color: #ffffff; /* change to your preferred background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* add a shadow effect */
+}
+
+.navbar-brand {
+    font-size: 1.5rem; /* adjust to your preferred font size */
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.nav-link {
+    color: #000000; /* change to your preferred font color */
+}

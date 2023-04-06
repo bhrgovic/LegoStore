@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Website - Categories</title>
+  <link rel="stylesheet" type="text/css" th:href="@{navbar.css}">
+</head>
+<body>
+
+
+<div class="navbar" th:fragment="header">
+  <ul>
+    <li><a th:href="@{/login-details}">Login Details</a></li>
+    <li><a th:href="@{/legoCategory/categoryAdmin.html}">Categories</a></li>
+    <li><a th:href="@{/legoStore/homePage.html}">Products</a></li>
+    <li><a th:href="@{/logout}">Logout</a></li>
+  </ul>
+</div>
+
+<div>
+  <h1>Categories</h1>
+  <p>Here are the categories of our products:</p>
+  <ul>
+    <li>Category 1</li>
+    <li>Category 2</li>
+    <li>Category 3</li>
+  </ul>
+</div>
+
+</body>
+</html>

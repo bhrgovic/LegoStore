@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Website</title>
+</head>
+<body>
+
+<div class="navbar" th:fragment="header">
+  <ul>
+    <li><a th:href="@{/login-details}">Login Details</a></li>
+    <li><a th:href="@{/categories}">Categories</a></li>
+    <li><a th:href="@{/products}">Products</a></li>
+    <li><a th:href="@{/logout}">Logout</a></li>
+  </ul>
+</div>
+
+<div th:fragment="content">
+  <div th:replace="content :: content"></div>
+</div>
+
+</body>
+</html>
