@@ -1,5 +1,6 @@
 package hr.algebra.java.web.lego.legostorewithdata.repository;
 
+import hr.algebra.java.web.lego.legostorewithdata.domain.Category;
 import hr.algebra.java.web.lego.legostorewithdata.domain.Lego;
 
 import java.util.ArrayList;
@@ -18,5 +19,9 @@ public interface LegoRepository {
     void deleteLego(Lego lego);
 
     void updateLego(Lego lego);
+
+    void newCategory(Category category);
+
+    void deleteCategory(Category category);
 
 }

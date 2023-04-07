@@ -109,6 +109,16 @@ public class LegoRepositoryJdbc implements LegoRepository {
     }
 
     @Override
+    public void newCategory(Category category) {
+
+    }
+
+    @Override
+    public void deleteCategory(Category category) {
+
+    }
+
+    @Override
     public Lego getLegoPiece(int id) {
         String query = SELECT_LEGO_PIECE + id;
         return jdbcTemplate.queryForObject(query,this::mapRowToLego);

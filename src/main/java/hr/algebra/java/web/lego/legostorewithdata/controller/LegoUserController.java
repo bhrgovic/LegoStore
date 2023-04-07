@@ -4,12 +4,11 @@ package hr.algebra.java.web.lego.legostorewithdata.controller;
 import hr.algebra.java.web.lego.legostorewithdata.domain.Lego;
 import hr.algebra.java.web.lego.legostorewithdata.publisher.CustomSpringEventPublisher;
 import hr.algebra.java.web.lego.legostorewithdata.repository.LegoRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/lego")
@@ -30,5 +29,17 @@ public class LegoUserController {
         model.addAttribute("newLegoPiece", new Lego());
         return "homePageUser";
     }
+
+
+    @GetMapping("/saveToCart/{id}")
+    public String saveToCart(@ModelAttribute Lego id, HttpSession session){
+
+        return "redirect:/lego/homePageUser.html";
+    }
+
+
+
+
+
 
 }
