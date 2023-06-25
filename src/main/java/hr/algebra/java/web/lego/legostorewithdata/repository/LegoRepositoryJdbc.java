@@ -21,13 +21,13 @@ import java.util.Optional;
 public class LegoRepositoryJdbc implements LegoRepository {
 
     private static final String LEGO_PIECES_TABLE_NAME = "LEGO_PIECES";
-    private static final String LEGO_PIECES_TABLE_NAME_ID = "ID";
+    private static final String LEGO_PIECES_TABLE_NAME_ID = "ID_LEGO";
 
     private static final String SELECT_ALL_LEGO_PIECES = "SELECT * FROM LEGO_PIECES WHERE 1=1 ";
 
-    private static final String SELECT_LEGO_PIECE = "SELECT * FROM LEGO_PIECES WHERE ID=";
+    private static final String SELECT_LEGO_PIECE = "SELECT * FROM LEGO_PIECES WHERE ID_LEGO=";
 
-    private static final String DELETE_LEGO_PIECE = "DELETE FROM LEGO_PIECES WHERE ID=";
+    private static final String DELETE_LEGO_PIECE = "DELETE FROM LEGO_PIECES WHERE ID_LEGO=";
 
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;

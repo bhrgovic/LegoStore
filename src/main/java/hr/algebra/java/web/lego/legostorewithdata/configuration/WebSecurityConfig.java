@@ -12,7 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -22,16 +25,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home").permitAll()
-                        .requestMatchers("/legoStore/homePage.html").hasAnyRole("ADMIN")
-                        .requestMatchers("/saveNewLegoPiece.html").hasAnyRole("ADMIN")
-                        .requestMatchers("/homePageUser.html").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/legoStore/login.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
-                        //.successHandler(new MySimpleUrlAuthenticationSuccessHandler())
-                        .defaultSuccessUrl("/lego/homePageUser.html", true)
+                        .loginPage("/legoStore/login.html")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/legoStore/homePage.html")
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
@@ -40,23 +40,16 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(final AuthenticationManagerBuilder auth) throws Exception {
+    public UserDetailsService jdbcUserDetailsService(DataSource dataSource) {
+        String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
+        String authsByUserQuery = "select username, authority from authorities where username = ?";
 
+        JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
 
-        final User.UserBuilder userBuilder = User.builder().passwordEncoder(this.encoder()::encode);
-        UserDetails user = userBuilder
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build();
+        users.setUsersByUsernameQuery(usersByUsernameQuery);
+        users.setAuthoritiesByUsernameQuery(authsByUserQuery);
 
-        UserDetails admin = userBuilder
-                .username("admin")
-                .password("password")
-                .roles("USER","ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
+        return users;
     }
 
     @Bean

@@ -1,5 +1,6 @@
 package hr.algebra.java.web.lego.legostorewithdata.filter;
 
+import hr.algebra.java.web.lego.legostorewithdata.domain.Log;
 import jakarta.servlet.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,10 @@ public class LogFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        Log log = new Log();
         logger.info("Hello from: " + request.getLocalAddr());
+        log.setIpAddress(request.getLocalAddr());
+        
         chain.doFilter(request, response);
     }
 

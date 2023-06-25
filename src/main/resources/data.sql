@@ -3,3 +3,13 @@ INSERT INTO LEGO_PIECES(NAME, CATEGORY, PRICE) VALUES('Firefighters', 'CITY', 42
 INSERT INTO LEGO_PIECES(NAME, CATEGORY, PRICE) VALUES('Camp Nou', 'CITY', 312.12);
 INSERT INTO LEGO_PIECES(NAME, CATEGORY, PRICE) VALUES('Train', 'CITY', 142.12);
 INSERT INTO LEGO_PIECES(NAME, CATEGORY, PRICE) VALUES('PEPPA PIG', 'DUPLO', 22.12);
+
+INSERT INTO users VALUES('user', '$2a$12$RNULg/Myxn7Ib0b0Ljscfedb7O7oAzmsvIctsloTNMjt7ORdFaCs2', true); --password: password
+INSERT INTO users VALUES('admin', '$2a$12$RNULg/Myxn7Ib0b0Ljscfedb7O7oAzmsvIctsloTNMjt7ORdFaCs2', true); --password: password
+
+INSERT INTO authorities VALUES('user', 'ROLE_USER');
+INSERT INTO authorities VALUES('admin', 'ROLE_ADMIN');
+INSERT INTO authorities VALUES('admin', 'ROLE_USER');
+
+
+insert into CartItems(usernamefk,Lego_id,quantity) values('admin',1,1);

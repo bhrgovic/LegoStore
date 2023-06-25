@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Cart Items</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .item-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .centered-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+<div class="container centered-container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Cart Items</h2>
+      <div th:each="cartItem : ${cartItems}" class="item-container">
+        <h4 th:text="'Lego : ' + ${cartItem.lego.name}"></h4>
+
+        <form th:action="@{/cart-items/{id}/update(id=${cartItem.id})}" method="post">
+          <input type="number" name="quantity" th:value="${cartItem.quantity}">
+          <button type="submit">Update</button>
+        </form>
+        <form th:action="@{/cart-items/{id}/delete(id=${cartItem.id})}" method="post">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
