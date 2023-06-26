@@ -13,7 +13,7 @@ public class Lego {
 
     private String name;
     private Integer id;
-    private Category category;
+    private String category;
     private BigDecimal price;
 
 }

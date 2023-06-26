@@ -1,11 +1,18 @@
+create table categories(
+                         idCategory int primary key auto_increment,
+                         name nvarchar(50) not null
+);
+
 CREATE TABLE LEGO_PIECES
 (
     ID_LEGO     INT GENERATED ALWAYS AS IDENTITY,
     NAME     VARCHAR(30)   NOT NULL,
-    CATEGORY VARCHAR(20)   NOT NULL,
+    CATEGORY VARCHAR(50)   NOT NULL,
     PRICE    DECIMAL(5, 2) NOT NULL,
     PRIMARY KEY (ID_LEGO)
+
 );
+
 
 
 create table users(
@@ -38,9 +45,6 @@ CREATE TABLE CartItems (
                            FOREIGN KEY (Lego_id) REFERENCES LEGO_PIECES(ID_LEGO)
 );
 
-CREATE TABLE login_logs (
-                            log_id INT PRIMARY KEY AUTO_INCREMENT,
-                            user_id INT,
-                            login_time TIMESTAMP,
-                            ip_address VARCHAR(255)
+CREATE TABLE log (
+                            message varchar(max)
 );

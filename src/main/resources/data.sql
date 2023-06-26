@@ -1,3 +1,11 @@
+
+insert into categories (name) values('MINDSTORMS');
+insert into categories (name) values('CITY');
+insert into categories (name) values('DUPLO');
+insert into categories (name) values('BIONICLE');
+insert into categories (name) values('NINJAGO');
+insert into categories (name) values('RACERS');
+
 INSERT INTO LEGO_PIECES(NAME, CATEGORY, PRICE) VALUES('Mindstorms v3', 'MINDSTORMS', 342.12);
 INSERT INTO LEGO_PIECES(NAME, CATEGORY, PRICE) VALUES('Firefighters', 'CITY', 42.12);
 INSERT INTO LEGO_PIECES(NAME, CATEGORY, PRICE) VALUES('Camp Nou', 'CITY', 312.12);
@@ -13,3 +21,5 @@ INSERT INTO authorities VALUES('admin', 'ROLE_USER');
 
 
 insert into CartItems(usernamefk,Lego_id,quantity) values('admin',1,1);
+insert into CartItems(usernamefk,Lego_id,quantity) values('admin',2,1);
+

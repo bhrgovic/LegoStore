@@ -4,6 +4,7 @@ import hr.algebra.java.web.lego.legostorewithdata.domain.Category;
 import hr.algebra.java.web.lego.legostorewithdata.domain.Lego;
 import hr.algebra.java.web.lego.legostorewithdata.domain.LegoRecord;
 import hr.algebra.java.web.lego.legostorewithdata.publisher.CustomSpringEventPublisher;
+import hr.algebra.java.web.lego.legostorewithdata.repository.CategoryRepository;
 import hr.algebra.java.web.lego.legostorewithdata.repository.LegoRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import java.math.BigDecimal;
 @SessionAttributes("legoPieces")
 public class LegoStoreController {
     private LegoRepository legoRepository;
+    private CategoryRepository categoryRepository;
 
     private CustomSpringEventPublisher customSpringEventPublisher;
 
@@ -29,6 +31,8 @@ public class LegoStoreController {
         customSpringEventPublisher.publishCustomEvent("Home page opened!");
         model.addAttribute("legoPieces",
                 legoRepository.getAllLegoPiecesList());
+        model.addAttribute("categories", categoryRepository.getAllCategories());
+
         model.addAttribute("newLegoPiece", new Lego());
         return "homePage";
     }

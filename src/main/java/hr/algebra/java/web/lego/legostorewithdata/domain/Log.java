@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Log {
-    int logId;
-    private int userId;
-    private Timestamp loginTime;
-    private String ipAddress;
+
+    private String message;
+
 }

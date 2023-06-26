@@ -1,7 +1,13 @@
 package hr.algebra.java.web.lego.legostorewithdata.domain;
 
-public enum Category {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    CITY, TECHNICS, DUPLO, MINDSTORMS, BIONICLE
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Category {
+    private int id;
+    private String name;
 }

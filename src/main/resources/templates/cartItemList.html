@@ -26,11 +26,11 @@
       <div th:each="cartItem : ${cartItems}" class="item-container">
         <h4 th:text="'Lego : ' + ${cartItem.lego.name}"></h4>
 
-        <form th:action="@{/cart-items/{id}/update(id=${cartItem.id})}" method="post">
+        <form th:href="@{/updateItem/{id}(id=${cartItem.id})}" method="post">
           <input type="number" name="quantity" th:value="${cartItem.quantity}">
           <button type="submit">Update</button>
         </form>
-        <form th:action="@{/cart-items/{id}/delete(id=${cartItem.id})}" method="post">
+        <form th:href="@{/deleteItem/{id}(id=${cartItem.id})}" method="post">
           <button type="submit">Delete</button>
         </form>
       </div>

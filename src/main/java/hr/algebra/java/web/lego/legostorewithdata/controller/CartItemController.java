@@ -28,19 +28,18 @@ public class CartItemController {
         return "cartItemList.html";
     }
 
-    @PostMapping("/cart-items/{id}/update")
-    public String updateCartItemQuantity(@PathVariable("id") Long id, @RequestParam("quantity") int quantity) {
-        CartItem cartItem = cartItemRepository.getCartItem(id);
-        cartItem.setQuantity(quantity);
+    @PostMapping("/updateItem/{id}")
+    public String updateCartItemQuantity(@ModelAttribute CartItem cartItem) {
+
         cartItemRepository.updateCartItem(cartItem);
-        return "redirect:/cart-items";
+        return "redirect:/cartItemList.html";
     }
 
-    @PostMapping("/cart-items/{id}/delete")
-    public String deleteCartItem(@PathVariable("id") Long id) {
-        CartItem cartItem = cartItemRepository.getCartItem(id);
+    @PostMapping("/deleteItem/{id}")
+    public String deleteCartItem(@ModelAttribute CartItem cartItem) {
+
         cartItemRepository.deleteCartItem(cartItem);
-        return "redirect:/cart-items";
+        return "redirect:/cartItemList.html";
     }
 }
 
