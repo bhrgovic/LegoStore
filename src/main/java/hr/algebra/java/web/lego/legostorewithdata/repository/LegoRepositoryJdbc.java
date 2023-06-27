@@ -46,15 +46,13 @@ public class LegoRepositoryJdbc implements LegoRepository {
         Lego lego = new Lego();
         lego.setId(rs.getInt(LEGO_PIECES_TABLE_NAME_ID));
         lego.setName(rs.getString("NAME"));
+        lego.setCategory(rs.getString("CATEGORY"));
         lego.setPrice(rs.getBigDecimal("PRICE"));
 
-        String categoryId = rs.getString("CATEGORY");
-        Category category = jdbcTemplate.queryForObject("SELECT * FROM categories WHERE name=?", new BeanPropertyRowMapper<>(Category.class), categoryId);
-        lego.setCategory(category.getName());
+
 
         return lego;
     }
-
     @Override
     public void saveNewLegoPiece(Lego lego) {
         saveLegoPieceDetails(lego);

@@ -1,50 +1,51 @@
-create table categories(
-                         idCategory int primary key auto_increment,
-                         name nvarchar(50) not null
+CREATE TABLE categories (
+                            idCategory INT PRIMARY KEY AUTO_INCREMENT,
+                            name NVARCHAR(50) NOT NULL
 );
 
-CREATE TABLE LEGO_PIECES
-(
-    ID_LEGO     INT GENERATED ALWAYS AS IDENTITY,
-    NAME     VARCHAR(30)   NOT NULL,
-    CATEGORY VARCHAR(50)   NOT NULL,
-    PRICE    DECIMAL(5, 2) NOT NULL,
-    PRIMARY KEY (ID_LEGO)
-
+CREATE TABLE LEGO_PIECES (
+                             ID_LEGO     INT primary key AUTO_INCREMENT,
+                             NAME        VARCHAR(30)   NOT NULL,
+                             CATEGORY    VARCHAR(50)   NOT NULL,
+                             PRICE       DECIMAL(5, 2) NOT NULL
 );
 
-
-
-create table users(
-                      username varchar_ignorecase(50) not null primary key,
-                      password varchar_ignorecase(500) not null,
-                      enabled boolean not null
+CREATE TABLE users (
+                       username VARCHAR_IGNORECASE(50) NOT NULL PRIMARY KEY,
+                       password VARCHAR_IGNORECASE(500) NOT NULL,
+                       enabled BOOLEAN NOT NULL
 );
 
-create table authorities (
-                             username varchar_ignorecase(50) not null,
-                             authority varchar_ignorecase(50) not null,
-                             constraint fk_authorities_users foreign key(username) references users(username)
+CREATE TABLE authorities (
+                             username VARCHAR_IGNORECASE(50) NOT NULL,
+                             authority VARCHAR_IGNORECASE(50) NOT NULL,
+                             CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users(username)
 );
 
-
--- Shopping Cart table
 CREATE TABLE ShoppingCarts (
-                               cart_id INT PRIMARY KEY auto_increment ,
-                               usernamefk varchar_ignorecase(50),
-                               FOREIGN KEY (usernamefk)references users(username)
+                               cart_id INT PRIMARY KEY AUTO_INCREMENT,
+                               usernamefk VARCHAR_IGNORECASE(50),
+                               FOREIGN KEY (usernamefk) REFERENCES users(username)
 );
 
--- Cart Items table
 CREATE TABLE CartItems (
-                           cart_item_id INT PRIMARY KEY auto_increment,
-                           usernamefk varchar_ignorecase(50) not null,
+                           cart_item_id INT PRIMARY KEY AUTO_INCREMENT,
+                           usernamefk VARCHAR_IGNORECASE(50) NOT NULL,
                            Lego_id INT,
                            quantity INT,
+                           price decimal (5,2),
+                           bought bool,
                            FOREIGN KEY (usernamefk) REFERENCES users(username),
                            FOREIGN KEY (Lego_id) REFERENCES LEGO_PIECES(ID_LEGO)
 );
 
-CREATE TABLE log (
-                            message varchar(max)
+CREATE TABLE Log (
+    message VARCHAR(MAX)
 );
+
+create table orderHistory(
+    IdOrderHistory int primary key auto_increment,
+    userOrdered nvarchar(50) not null,
+    price decimal(5,2)
+);
+

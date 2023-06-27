@@ -63,7 +63,7 @@
         <input class="form-control mb-2" type="text" name="name" th:field="*{name}" th:required="required" placeholder="Name"/>
         <select class="form-control mb-2" th:field="*{category}" th:required="required">
             <option th:each="category : ${categories}"
-                    th:value="${category}"
+                    th:value="${category.name}"
                     th:text="${category.name}">
             </option>
         </select>

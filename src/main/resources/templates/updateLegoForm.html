@@ -9,8 +9,13 @@
 <form th:object="${legoPiece}" th:action="@{/legoStore/updateLego/{id}(id=${legoPiece.id})}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <p>
-        <label for="category">Category:</label>
-        <input type="text" id="category" th:field="*{category}" required/>
+        <label>Category:</label>
+        <select class="form-control mb-2" th:field="*{category}" th:required="required">
+            <option th:each="category : ${categories}"
+                    th:value="${category.name}"
+                    th:text="${category.name}">
+            </option>
+        </select>
     </p>
     <p>
         <label for="name">Name:</label>

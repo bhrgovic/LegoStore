@@ -9,17 +9,8 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItem {
-
+public class OrderHistory {
     private int id;
-    private String usernamefk;
-    private Lego lego;
+    private String userOrdered;
     private BigDecimal price;
-    private int quantity;
-
-    public CartItem(String username, Lego legoPiece, int quantity1) {
-        usernamefk= username;
-        lego=legoPiece;
-        quantity=quantity1;
-    }
 }

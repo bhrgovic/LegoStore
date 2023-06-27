@@ -51,6 +51,7 @@ public class LegoStoreController {
     public String showUpdateForm(@ModelAttribute Lego lego,Model model) {
         model.addAttribute("legoPiece",
                 legoRepository.getLegoPiece(lego.getId()));
+        model.addAttribute("categories", categoryRepository.getAllCategories());
         return "updateLegoForm.html";
     }
 

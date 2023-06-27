@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -46,12 +47,15 @@ public class CartItemRepositoryJdbc implements CartItemRepository {
     private CartItem mapRowToCartItem(ResultSet rs, int rowNum) throws SQLException {
         CartItem cartItem = new CartItem();
         cartItem.setId(rs.getInt(CART_ITEM_TABLE_NAME_ID));
-
         cartItem.setQuantity(rs.getInt("quantity"));
 
         int legoId = rs.getInt("lego_id");
         Lego lego = jdbcTemplate.queryForObject("SELECT * FROM Lego_pieces WHERE Id_Lego=?", new BeanPropertyRowMapper<>(Lego.class), legoId);
         cartItem.setLego(lego);
+
+        // Calculate the price
+        BigDecimal price = lego.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        cartItem.setPrice(price);
 
         return cartItem;
     }
@@ -68,11 +72,11 @@ public class CartItemRepositoryJdbc implements CartItemRepository {
 
     @Override
     public void updateCartItem(CartItem cartItem) {
-        String query="UPDATE CartItems SET quantity=" + cartItem.getQuantity()
-                + " WHERE cart_item_id=" + cartItem.getId(); ;
+        String query = "UPDATE CartItems SET quantity=" + cartItem.getQuantity() +
+                ", price=" + cartItem.getLego().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())) +
+                " WHERE cart_item_id=" + cartItem.getId();
         jdbcTemplate.execute(query);
     }
-
     @Override
     public void deleteCartItem(CartItem cartItem) {
         String query = DELETE_CART_ITEM + cartItem.getId();
@@ -89,7 +93,7 @@ public class CartItemRepositoryJdbc implements CartItemRepository {
 
         cartItemDetails.put(CART_ITEM_TABLE_NAME, cartItem.getId());
         cartItemDetails.put("usernamefk", cartItem.getUsernamefk());
-        cartItemDetails.put("lego_id", cartItem.getLego());
+        cartItemDetails.put("lego_id", cartItem.getLego().getId());
         cartItemDetails.put("quantity", cartItem.getQuantity());
 
         simpleJdbcInsert.executeAndReturnKey(cartItemDetails);

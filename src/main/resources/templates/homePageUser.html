@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -34,7 +34,8 @@
 <body>
 
 <nav class="navbar navbar-expand-lg">
-  <a class="navbar-cart" href="#">Cart<i class="bi bi-cart-fill"></i></a>
+  <a class="navbar-cart" th:href="@{/cart/viewCart(username=${#request.userPrincipal.name})}">Cart<i class="bi bi-cart-fill"></i></a>
+
   <a class="navbar-brand" href="#">Welcome to Lego Store Algebra</a>
 </nav>
 
@@ -57,7 +58,12 @@
       <td><span th:text="${legoPiece.name}">Name</span></td>
       <td><span th:text="${legoPiece.category}">Category</span></td>
       <td><span th:text="${legoPiece.price}">Price</span></td>
-      <td><a class="btn btn-primary" th:href="@{/lego/buyLego/{id}(id=${legoPiece.id})}">Add to cart</a></td>
+      <td>
+        <form method="post" th:action="@{/lego/addToCart}">
+          <input type="hidden" name="legoId" th:value="${legoPiece.id}" />
+          <button class="btn btn-primary" type="submit">Add to cart</button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

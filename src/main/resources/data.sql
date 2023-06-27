@@ -23,3 +23,6 @@ INSERT INTO authorities VALUES('admin', 'ROLE_USER');
 insert into CartItems(usernamefk,Lego_id,quantity) values('admin',1,1);
 insert into CartItems(usernamefk,Lego_id,quantity) values('admin',2,1);
 
+insert into orderHistory(userOrdered,price) values('admin',499.99);
+insert into orderHistory(userOrdered,price) values('admin',489.99);
+insert into orderHistory(userOrdered,price) values('admin',199.99);

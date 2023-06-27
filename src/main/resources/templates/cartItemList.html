@@ -8,6 +8,9 @@
       border: 1px solid #ccc;
       padding: 10px;
       margin-bottom: 10px;
+      width: 60%; /* Adjust the width as per your preference */
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .centered-container {
@@ -16,23 +19,33 @@
       align-items: center;
       height: 100vh;
     }
+
+    .total-container {
+      text-align: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 <div class="container centered-container">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-8 offset-md-2">
       <h2>Cart Items</h2>
       <div th:each="cartItem : ${cartItems}" class="item-container">
-        <h4 th:text="'Lego : ' + ${cartItem.lego.name}"></h4>
+        <h4 th:text="'Lego: ' + ${cartItem.lego.name}"></h4>
+        <p><strong>Price:</strong> <span th:text="${cartItem.lego.price.multiply(cartItem.quantity)}"></span></p>
 
-        <form th:href="@{/updateItem/{id}(id=${cartItem.id})}" method="post">
+        <form th:href="@{/cart/updateItem/{id}(id=${cartItem.id})}" method="post">
           <input type="number" name="quantity" th:value="${cartItem.quantity}">
           <button type="submit">Update</button>
         </form>
-        <form th:href="@{/deleteItem/{id}(id=${cartItem.id})}" method="post">
+        <form th:href="@{/cart/deleteItem/{id}(id=${cartItem.id})}" method="post">
           <button type="submit">Delete</button>
         </form>
+      </div>
+      <div class="total-container">
+        <h4>Total Price: <span th:text="${totalPrice}"></span></h4>
+        <button th:href="@{/cart/checkout}" class="btn btn-primary" type="button">Checkout</button>
       </div>
     </div>
   </div>

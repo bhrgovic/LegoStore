@@ -4,6 +4,7 @@ import hr.algebra.java.web.lego.legostorewithdata.domain.Log;
 import hr.algebra.java.web.lego.legostorewithdata.repository.LogRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
