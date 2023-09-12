@@ -33,6 +33,7 @@ public class CartItemRepositoryJdbc implements CartItemRepository {
 
     private static final String DELETE_CART_ITEM = "DELETE FROM CartItems WHERE cart_item_id= ";
 
+    private LegoRepository legoRepository;
 
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;
@@ -66,14 +67,37 @@ public class CartItemRepositoryJdbc implements CartItemRepository {
     }
 
     @Override
-    public CartItem getCartItem(Long id) {
-        return jdbcTemplate.queryForObject(SELECT_CART_ITEM_ID + id, this::mapRowToCartItem);
+    public CartItem getCartItem(int cartItemId) {
+        String sql = "SELECT ci.cart_item_id, ci.quantity, ci.usernamefk, l.ID_LEGO, l.name, l.price,l.category " +
+                "FROM CartItems ci " +
+                "JOIN LEGO_PIECES l ON ci.Lego_id = l.ID_lego " +
+                "WHERE ci.cart_item_id = ?";
+
+        return jdbcTemplate.queryForObject(sql, new Object[]{cartItemId}, (resultSet, rowNum) -> {
+            CartItem cartItem = new CartItem();
+            cartItem.setId(resultSet.getInt("cart_item_id"));
+            cartItem.setQuantity(resultSet.getInt("quantity"));
+            cartItem.setUsernamefk(resultSet.getString("usernamefk"));
+
+            Lego lego = new Lego();
+            lego.setId(resultSet.getInt("ID_LEGO"));
+            lego.setName(resultSet.getString("name"));
+            lego.setCategory(resultSet.getString("category"));
+            lego.setPrice(resultSet.getBigDecimal("price"));
+
+            cartItem.setLego(lego);
+            BigDecimal bg= cartItem.getLego().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+            cartItem.setPrice(bg);
+            return cartItem;
+        });
     }
 
     @Override
     public void updateCartItem(CartItem cartItem) {
+        BigDecimal bg = cartItem.getLego().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        cartItem.setPrice(bg);
         String query = "UPDATE CartItems SET quantity=" + cartItem.getQuantity() +
-                ", price=" + cartItem.getLego().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())) +
+                ", price=" + cartItem.getPrice() +
                 " WHERE cart_item_id=" + cartItem.getId();
         jdbcTemplate.execute(query);
     }

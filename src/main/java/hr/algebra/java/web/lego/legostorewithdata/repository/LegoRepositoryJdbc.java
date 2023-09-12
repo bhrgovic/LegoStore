@@ -110,7 +110,7 @@ public class LegoRepositoryJdbc implements LegoRepository {
         String query = "UPDATE LEGO_PIECES SET NAME='" + lego.getName() +
                 "' ,PRICE=" + lego.getPrice() +
                 " ,CATEGORY='" + lego.getCategory() +
-                "' WHERE ID=" + lego.getId();
+                "' WHERE ID_LEGO=" + lego.getId();
         jdbcTemplate.execute(query);
     }
 }

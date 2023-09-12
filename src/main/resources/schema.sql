@@ -33,8 +33,7 @@ CREATE TABLE CartItems (
                            usernamefk VARCHAR_IGNORECASE(50) NOT NULL,
                            Lego_id INT,
                            quantity INT,
-                           price decimal (5,2),
-                           bought bool,
+                           price decimal (8,2),
                            FOREIGN KEY (usernamefk) REFERENCES users(username),
                            FOREIGN KEY (Lego_id) REFERENCES LEGO_PIECES(ID_LEGO)
 );

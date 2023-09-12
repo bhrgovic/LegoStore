@@ -26,6 +26,9 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/legoStore/login.html").permitAll()
+                        .requestMatchers("/lego/homePageUser.html").permitAll()
+                        //.requestMatchers("/lego/", "/cart").hasRole("ROLE_USER")
+                        //.requestMatchers("/**").hasRole("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

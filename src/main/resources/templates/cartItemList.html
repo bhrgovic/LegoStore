@@ -35,17 +35,16 @@
         <h4 th:text="'Lego: ' + ${cartItem.lego.name}"></h4>
         <p><strong>Price:</strong> <span th:text="${cartItem.lego.price.multiply(cartItem.quantity)}"></span></p>
 
-        <form th:href="@{/cart/updateItem/{id}(id=${cartItem.id})}" method="post">
-          <input type="number" name="quantity" th:value="${cartItem.quantity}">
-          <button type="submit">Update</button>
-        </form>
-        <form th:href="@{/cart/deleteItem/{id}(id=${cartItem.id})}" method="post">
-          <button type="submit">Delete</button>
-        </form>
+        <a th:href="@{/cart/updateItem/{id}(id=${cartItem.id})}" method="get">
+          Update
+        </a>
+        <a th:href="@{/cart/deleteItem/{id}(id=${cartItem.id})}" method="get">
+          Delete
+        </a>
       </div>
       <div class="total-container">
         <h4>Total Price: <span th:text="${totalPrice}"></span></h4>
-        <button th:href="@{/cart/checkout}" class="btn btn-primary" type="button">Checkout</button>
+        <a th:href="@{/cart/checkout}" method="get" class="btn btn-primary" type="button">Checkout</a>
       </div>
     </div>
   </div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Canceled</title>
+
+  <!-- Add Material-UI CSS and styles.css links here -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="/path/to/your/styles.css">
+
+  <!-- Add custom CSS styles for the cancel page -->
+  <style>
+    /* Custom styles for the cancel page */
+    .cancel-container {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .cancel-message {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .home-button {
+      background-color: #2196F3;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<div class="cancel-container">
+  <div class="cancel-message">Canceled Order</div>
+  <form th:action="@{/lego/homePageUser.html}" method="get">
+    <button class="home-button" type="submit">Home Page</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Cart Item</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Update Cart Item</h2>
+    <form th:action="@{/cart/updateItem/{id}(id=${cartItem.id})}"  method="post" th:object="${cartItem}">
+        <!-- Include other fields of CartItem -->
+        <input type="hidden" th:field="*{id}" />
+        <input th:field="*{quantity}" />
+        <!-- Include other hidden fields as needed -->
+        <input type="submit" value="Update" />
+    </form>
+
+
+</div>
+</body>
+</html>

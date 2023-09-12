@@ -7,7 +7,7 @@ import java.util.List;
 public interface CartItemRepository {
 
     List<CartItem> getCartItems(String username);
-    CartItem getCartItem(Long id);
+    CartItem getCartItem(int id);
     void updateCartItem(CartItem cartItem);
 
     void deleteCartItem(CartItem cartItem);

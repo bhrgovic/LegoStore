@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/path/to/your/css/styles.css">
+</head>
+<body>
+<h1>Checkout</h1>
+<!-- Display the price from the cart -->
+<p th:text="'Total Price: $' + ${cartTotal}"></p>
+
+<!-- Your checkout form goes here -->
+<form th:action="@{/paypal/create-order}" method="post">
+  <!-- Payment form fields (e.g., name, email, etc.) -->
+  <input type="hidden" name="item_name" value="Your Product">
+  <input type="hidden" name="amount" value="0.01">
+
+  <!-- Add more fields as needed -->
+
+  <!-- PayPal Submit Button -->
+  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online">
+</form>
+</body>
+</html>

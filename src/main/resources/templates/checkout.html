@@ -7,7 +7,7 @@
 <body>
 <div class="container">
   <h2>Checkout</h2>
-  <form th:action="@{/cart/checkout}" method="post">
+  <form th:action="@{/cart/checkout1}" method="post">
     <div class="form-check">
       <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash" checked>
       <label class="form-check-label" for="cash">
@@ -22,10 +22,8 @@
     </div>
     <div class="total-container">
       <h4>Total Price: <span th:text="${totalPrice}"></span></h4>
-      <button class="btn btn-primary" type="button">Proceed to payment</button>
+      <button class="btn btn-primary" type="submit">Finalize</button> <!-- Changed anchor tag to submit button -->
     </div>
-
-
   </form>
 </div>
 </body>

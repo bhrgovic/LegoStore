@@ -13,4 +13,10 @@ public class OrderHistory {
     private int id;
     private String userOrdered;
     private BigDecimal price;
+
+    public OrderHistory(String user,BigDecimal price1) {
+        userOrdered=user;
+        price=price1;
+    }
+
 }
