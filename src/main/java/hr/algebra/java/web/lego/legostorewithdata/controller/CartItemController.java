@@ -94,11 +94,11 @@ public class CartItemController {
             }
             return "redirect:/lego/homePageUser.html";
         } else if (paymentMethod.equals("paypal")) {
-            // Perform PayPal payment processing
+            //to do
 
             return "redirect:/paypal/checkout-pay.html"; // Replace with the actual PayPal redirect URL
         } else {
-            // Handle invalid payment method
+            // to do
             return "redirect:/cart/user/{username}"; // Redirect back to the cart with an error message, if needed
         }
 
